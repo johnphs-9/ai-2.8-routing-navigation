@@ -39,11 +39,11 @@ A developer runs `npm install react-router`. Will this work for a React web appl
 
 A - Yes, `react-router` is the correct package for web applications
 
-B - No, the correct package for web applications is `react-router-dom`
+B - No, the correct package for web applications is `react-router-native`
 
-C - Yes, both packages are interchangeable
+C - No, React Router must be installed through the React CLI, not npm
 
-D - No, React Router must be installed through the React CLI, not npm
+D - No, `react-router` only works with Next.js projects
 
 ---
 
@@ -61,32 +61,45 @@ D - `Route`
 
 ---
 
-### Q5 (True/False)
+### Q5
 
-In React Router, the `<Routes>` component renders all matching `<Route>` components simultaneously when a URL matches more than one path.
+The CRM declares this nested route:
 
-A - True
+```jsx
+<Route path="app" element={<RootLayout />}>
+  <Route index element={<DashboardPage />} />
+  <Route path="customers" element={<CustomersPage />} />
+</Route>
+```
 
-B - False
+What is the purpose of `<Outlet />` inside `RootLayout`?
+
+A - It renders a list of all available routes as a navigation menu
+
+B - It marks the spot where the matched child route's element should render
+
+C - It automatically redirects to the first child route
+
+D - It prevents child routes from rendering until the parent finishes loading
 
 ---
 
 ### Q6
 
-The CRM has these two routes declared in this order:
+The CRM has these two routes declared as direct siblings, in this order, both nested under the same `path="app"` parent:
 
 ```jsx
-<Route path="/customers/:id"  element={<CustomerDetail />} />
-<Route path="/customers/new"  element={<AddCustomer />} />
+<Route path="customers/:id"  element={<CustomerDetailPage />} />
+<Route path="customers/new"  element={<NewCustomerPage />} />
 ```
 
-What happens when the user navigates to `/customers/new`?
+What happens when the user navigates to `/app/customers/new`?
 
 A - Both components render at the same time
 
-B - `AddCustomer` renders because static routes always take priority over dynamic ones
+B - `NewCustomerPage` renders because static routes always take priority over dynamic ones
 
-C - `CustomerDetail` renders with `id = "new"` because the dynamic route matches first
+C - `CustomerDetailPage` renders with `id = "new"` because the dynamic route matches first
 
 D - React Router throws an error about ambiguous routes
 

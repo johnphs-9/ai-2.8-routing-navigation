@@ -5,7 +5,6 @@
 - **Lesson:** Routing and Navigation with React Router / 2.8
 - **Type:** Optional Take-Home Assignment
 - **Estimated Time:** 2–3 hours
-- **Due:** Before next lesson
 - **Submission:** GitHub repository link or ZIP file
 
 ## Learning Objectives Covered
@@ -42,8 +41,8 @@ A multi-page React application that:
 #### 1. Project Setup
 
 - [ ] Create a new React app using Vite: `npm create vite@latest task-manager -- --template react`
-- [ ] Install React Router: `npm install react-router-dom`
-- [ ] No other libraries — use only React and `react-router-dom`
+- [ ] Install React Router: `npm install react-router@7`
+- [ ] No other libraries — use only React and `react-router`
 
 #### 2. Mock Data
 
