@@ -1815,33 +1815,6 @@ navigate("/app");
 navigate("/app", { replace: true });
 ```
 
-**Protecting the login route itself**
-
-```jsx
-// Wrong — creates an infinite redirect loop
-<Route element={<ProtectedRoute />}>
-  <Route path="login" element={<LoginPage />} />
-</Route>
-
-// Correct — login is always public, declared outside ProtectedRoute
-<Route path="login" element={<LoginPage />} />
-<Route element={<ProtectedRoute />}>
-  {/* ...authenticated routes... */}
-</Route>
-```
-
-**Assuming AuthContext has a loading flag**
-
-```jsx
-// Wrong — AuthContext never exposes `loading`; this will always be undefined
-const { user, loading } = useContext(AuthContext);
-if (loading) return <Spinner />;
-
-// Correct — only check what AuthContext actually provides
-const { user } = useContext(AuthContext);
-if (!user) return <Navigate to="/login" replace />;
-```
-
 ---
 
 ## Summary
