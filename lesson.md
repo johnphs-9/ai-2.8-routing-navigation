@@ -2,7 +2,7 @@
 
 ## Overview
 
-- **Duration:** ~2 hours (hands-on lab)
+- **Duration:** ~2 hours (hands-on lab); Parts 8 and 9 are optional and can be skipped or covered verbally if time is short
 - **Prerequisites:** Lesson 2.6, Advanced State Management: Context API and Reducers
 
 ## Learning Objectives
@@ -96,7 +96,7 @@ simple-crm-web/src/
 Before writing any routes, it helps to see the shape of where this lesson is headed. The CRM's URLs split into two groups:
 
 - **Public**: `/` (a welcome page anyone can see) and `/login` (the sign-in form)
-- **Authenticated**: everything else, grouped under `/app` — the dashboard at `/app`, the customer list at `/app/customers`, and so on
+- **Authenticated**: everything else, grouped under `/app`: the dashboard at `/app`, the customer list at `/app/customers`, and so on
 
 Grouping every authenticated page under one `/app` prefix means a single guard, built in Part 9, can protect all of them at once, rather than checking authentication page by page.
 
@@ -148,7 +148,7 @@ Nothing else exists yet, only these two routes. You will add the `/app` routes o
 | Route    | Page          | Access |
 | -------- | ------------- | ------ |
 | `/`      | `WelcomePage` | Public |
-| `/login` | placeholder   | —      |
+| `/login` | placeholder   | n/a    |
 
 This table grows through the lesson. By the end it will list every real page and who can access it.
 
@@ -168,10 +168,10 @@ React Router provides two navigation components:
 - **`NavLink`** does everything `Link` does, but also knows when its `to` path matches the current URL. It passes an `isActive` boolean into the `className` function so you can apply active styling to the current page's link.
 
 ```jsx
-// Link — no active state
+// Link: no active state
 <Link to="/app/customers">Customers</Link>
 
-// NavLink — applies a different class when active
+// NavLink: applies a different class when active
 <NavLink
   to="/app/customers"
   className={({ isActive }) => (isActive ? styles.navItemActive : styles.navItem)}
@@ -536,7 +536,7 @@ Two things changed from the Lesson 2.6 version, beyond the move itself:
 Add the two new classes this page introduces, `.page-header` and `.btn-primary-link`, to `src/App.css` alongside the existing global classes:
 
 ```css
-/* src/App.css — add near the other layout classes */
+/* src/App.css: add near the other layout classes */
 .page-header {
   display: flex;
   align-items: center;
@@ -667,7 +667,7 @@ export default App;
 | Route            | Page            | Access        |
 | ---------------- | --------------- | ------------- |
 | `/`              | `WelcomePage`   | Public        |
-| `/login`         | placeholder     | —             |
+| `/login`         | placeholder     | n/a           |
 | `/app`           | `DashboardPage` | Authenticated |
 | `/app/customers` | `CustomersPage` | Authenticated |
 
@@ -819,7 +819,7 @@ export default NewCustomerPage;
 Add the `.back-link` class this page introduces to `src/App.css`, alongside `.page-header` and `.btn-primary-link` from Part 5:
 
 ```css
-/* src/App.css — add near the other layout classes */
+/* src/App.css: add near the other layout classes */
 .back-link {
   display: inline-block;
   margin-bottom: var(--space-4);
@@ -1096,7 +1096,9 @@ Notice that `deleteCustomer` already calls `window.confirm` and updates `Custome
 
 ---
 
-## Part 8: The EditCustomerPage and Pre-filled Forms (20 minutes)
+## Part 8 (Optional): The EditCustomerPage and Pre-filled Forms (20 minutes)
+
+> This part is optional. If time is short, skip the code-along and either cover it verbally or leave it for learners to attempt on their own.
 
 ### A Page That Loads Data Into a Form
 
@@ -1329,7 +1331,9 @@ import EditCustomerPage from "./pages/EditCustomerPage";
 
 ---
 
-## Part 9: Locking It Down with ProtectedRoute (20 minutes)
+## Part 9 (Optional): Locking It Down with ProtectedRoute (20 minutes)
+
+> This part is optional. If time is short, skip the code-along and either cover it verbally or leave it for learners to attempt on their own.
 
 ### Everything Under /app Is Currently Public
 
@@ -1587,12 +1591,12 @@ Update `src/components/Sidebar.jsx`:
 ```jsx
 // src/components/Sidebar.jsx
 
-// Before — Part 3's temporary stand-in
+// Before: Part 3's temporary stand-in
 // const DUMMY_USER = { name: "Daniel Goh", email: "daniel@simplesystems.io", role: "admin" };
 // function Sidebar() {
 //   const user = DUMMY_USER;
 
-// After — Part 9, ProtectedRoute and LoginPage guarantee a real user
+// After: Part 9, ProtectedRoute and LoginPage guarantee a real user
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -1620,7 +1624,7 @@ Two pieces of state from Lesson 2.6 are dead code by this point, and it is worth
 `selectedId` and `setSelectedId` drove the old master-detail layout; the URL now plays that role. Open `src/contexts/CustomerContext.jsx` and remove both:
 
 ```jsx
-// src/contexts/CustomerContext.jsx — remove this line
+// src/contexts/CustomerContext.jsx: remove this line
 const [selectedId, setSelectedId] = useState(null);
 
 // and remove selectedId / setSelectedId from the value object,
@@ -1682,7 +1686,7 @@ const { customers, loading, error, submitting } = state;
 
 Every page under `/app` currently requires only a login, not a specific role. Any signed-in user can see "Add Customer," add customers, edit them, and delete them, admin or not. Restricting add, edit, and delete to admins only, both in the UI and at the route level, is Bonus Challenge 1.
 
-**Browser check — full flow:**
+**Browser check, full flow:**
 
 1. Log out (or open a private browser window).
 2. Navigate directly to `http://localhost:5173/app/customers/c1`, you should be redirected to `/login`.
@@ -1701,13 +1705,13 @@ These challenges have no provided solution. They are for learners who finish the
 
 Right now, any signed-in user can add, edit, and delete customers, admin or not, whether by clicking a link or button or by typing a URL directly. This challenge has two parts.
 
-**Part A — hide the UI for non-admins.** Now that real authentication exists, `hasRole("admin")` from `AuthContext` finally has a real `user` to check. Re-add role checks to:
+**Part A: hide the UI for non-admins.** Now that real authentication exists, `hasRole("admin")` from `AuthContext` finally has a real `user` to check. Re-add role checks to:
 
 - `CustomersPage`'s "Add Customer" `<Link>`
 - `CustomerCard`'s Delete button
 - `CustomerDetailPage`'s Delete button (from the earlier activity)
 
-**Part B — block the routes, not just the links.** Hiding a link does not stop someone from typing the URL directly. Add a second, nested `ProtectedRoute` around just the add and edit routes, configured with `requiredRole="admin"`:
+**Part B: block the routes, not just the links.** Hiding a link does not stop someone from typing the URL directly. Add a second, nested `ProtectedRoute` around just the add and edit routes, configured with `requiredRole="admin"`:
 
 ```jsx
 <Route path="customers" element={<CustomersPage />} />
@@ -1753,12 +1757,12 @@ Add pagination to `CustomersPage` so that only 5 customers are shown per page. T
 ```jsx
 // src/pages/CustomerDetailPage.jsx
 
-// Wrong — data does not update when navigating from customer c1 to c2
+// Wrong: data does not update when navigating from customer c1 to c2
 useEffect(() => {
   fetchCustomer();
 }, []);
 
-// Correct — re-fetches whenever id changes
+// Correct: re-fetches whenever id changes
 useEffect(() => {
   fetchCustomer();
 }, [id]);
@@ -1769,13 +1773,13 @@ useEffect(() => {
 ```jsx
 // src/App.jsx
 
-// Wrong — "/customers" replaces the whole URL instead of extending it,
+// Wrong: "/customers" replaces the whole URL instead of extending it,
 // this route would actually live at /customers, not /app/customers
 <Route path="app" element={<RootLayout />}>
   <Route path="/customers" element={<CustomersPage />} />
 </Route>
 
-// Correct — relative paths join onto the parent's path
+// Correct: relative paths join onto the parent's path
 <Route path="app" element={<RootLayout />}>
   <Route path="customers" element={<CustomersPage />} />
 </Route>
@@ -1798,20 +1802,20 @@ Some older routing libraries match the first route in the list that fits the URL
 **Using `<a>` instead of `<Link>`**
 
 ```jsx
-// Wrong — causes a full page reload; Context state is lost
+// Wrong: causes a full page reload; Context state is lost
 <a href="/app/customers/c1">View</a>
 
-// Correct — client-side navigation; state is preserved
+// Correct: client-side navigation; state is preserved
 <Link to="/app/customers/c1">View</Link>
 ```
 
 **Forgetting `replace` after login**
 
 ```jsx
-// Wrong — the user can press Back and return to the login page
+// Wrong: the user can press Back and return to the login page
 navigate("/app");
 
-// Correct — the login page is removed from the history stack
+// Correct: the login page is removed from the history stack
 navigate("/app", { replace: true });
 ```
 
@@ -1839,5 +1843,5 @@ The routing architecture you have built in this lesson is the standard pattern f
 
 ## Additional Resources
 
-- [React Router — Official Documentation](https://reactrouter.com/en/main)
-- [React Router — Tutorial](https://reactrouter.com/en/main/start/tutorial)
+- [React Router: Official Documentation](https://reactrouter.com/en/main)
+- [React Router: Tutorial](https://reactrouter.com/en/main/start/tutorial)
