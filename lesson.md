@@ -875,8 +875,6 @@ import NewCustomerPage from "./pages/NewCustomerPage";
 </Route>;
 ```
 
-> **A routing question is coming.** In Part 7 you will add `customers/:id`, a dynamic route that could also match the literal word `new`. You might expect that whichever route is declared first "wins", it does not work that way in React Router. The real rule is spelled out in Common Pitfalls once `customers/:id` exists to demonstrate it against.
-
 **Browser check:** Click "Add Customer" from `/app/customers`. The form should appear at `/app/customers/new`. Fill it in and submit, you should be redirected to `/app/customers/<new-id>`, which does not have a real page yet (Part 7 builds it, so expect a blank result or console warning for now). Go back to `/app/customers` and confirm the new customer appears in the list.
 
 ---
@@ -1843,5 +1841,5 @@ The routing architecture you have built in this lesson is the standard pattern f
 
 ## Additional Resources
 
-- [React Router: Official Documentation](https://reactrouter.com/en/main)
-- [React Router: Tutorial](https://reactrouter.com/en/main/start/tutorial)
+- [React Router: Official Documentation](https://reactrouter.com)
+- [React Router: Tutorial](https://reactrouter.com/tutorials/address-book)

@@ -1,6 +1,6 @@
 # Pre-Reading: Lesson 2.8, Routing and Navigation with React Router
 
-Timebox **1.5–2 hours** across these resources before the lesson. You do not need to memorise API details; focus on understanding how client-side routing works and why it is different from following a normal hyperlink.
+Timebox **1–1.5 hours** across these resources before the lesson. You do not need to memorise API details; focus on understanding how client-side routing works and why it is different from following a normal hyperlink.
 
 ---
 
@@ -18,7 +18,7 @@ Timebox **1.5–2 hours** across these resources before the lesson. You do not n
 
 **Read (20 min)**
 
-- [React Router — Feature Overview](https://reactrouter.com/en/main/start/overview): Read the full overview page. It introduces `BrowserRouter`, `Routes`, `Route`, `Link`, and `useNavigate` in a compact format that previews what you will build in the lab.
+- [React Router — Routing](https://reactrouter.com/start/declarative/routing): Read the full page. It introduces `BrowserRouter`, `Routes`, `Route`, and `Link` in a compact format that previews what you will build in the lab.
 
 **Key ideas:**
 
@@ -34,7 +34,7 @@ Timebox **1.5–2 hours** across these resources before the lesson. You do not n
 
 **Read (15 min)**
 
-- [React Router — useParams](https://reactrouter.com/en/main/hooks/use-params): Read the full page — it is short. Focus on how the `:paramName` syntax in the route path maps to a key in the object returned by `useParams`.
+- [React Router — useParams](https://reactrouter.com/api/hooks/useParams): Read the full page, it is short. Focus on how the `:paramName` syntax in the route path maps to a key in the object returned by `useParams`.
 
 **Key idea to take away:** Dynamic routes let you use a single route definition to handle many URLs. `/customers/:id` handles `/customers/1`, `/customers/2`, and so on. The value is always a string, even when it looks like a number.
 
@@ -44,7 +44,7 @@ Timebox **1.5–2 hours** across these resources before the lesson. You do not n
 
 **Read (10 min)**
 
-- [React Router — useNavigate](https://reactrouter.com/en/main/hooks/use-navigate): Read the full page.
+- [React Router — useNavigate](https://reactrouter.com/api/hooks/useNavigate): Read the full page.
 
 **Key ideas:**
 
@@ -56,27 +56,11 @@ Timebox **1.5–2 hours** across these resources before the lesson. You do not n
 
 ## 5. Protected Routes and Authentication Flows
 
-**Watch (15 min)**
-
-- Search YouTube for **"React Router protected routes"** and watch any tutorial under 15 minutes that shows a `ProtectedRoute` (or `RequireAuth`) wrapper component. There are many good options; pick one published in 2023 or later to ensure it uses React Router v6 syntax.
-
-**What to look for:**
-
-- The wrapper checks whether a user is authenticated
-- If not authenticated, it renders `<Navigate to="/login" state={{ from: location }} replace />`
-- After login, the login page reads `location.state.from` and redirects the user back
-
-**Key idea to take away:** A protected route is just a component that renders either its children or a redirect — no special React Router API is required.
-
----
-
-## 6. SPAs and the URL: Why This Matters
-
 **Read (10 min)**
 
-- [web.dev: Navigation and resource timing](https://web.dev/articles/navigation-and-resource-timing): Skim the first two sections. This gives you a mental model of what a normal browser navigation costs — a full round trip to the server — compared to what a client-side route change costs (nothing, except a JavaScript function call).
+- [React Router — Navigate](https://reactrouter.com/api/components/Navigate): Read the full page, it is short. This is the component used to redirect a user away from a page they should not see.
 
-**Key idea to take away:** The whole point of client-side routing is that navigation feels instantaneous because no server round-trip is needed. The trade-off is that you have to manage routing yourself using a library like React Router.
+**Key idea to take away:** A protected route is just a component that checks whether a user is authenticated, then renders either its children or a `<Navigate to="/login" replace />` redirect, no special React Router API is required beyond this one component. You will build this wrapper yourself in the lab.
 
 ---
 

@@ -137,7 +137,7 @@ If you use an AI coding assistant:
 
 ## References
 
-- [React Router — Official Documentation](https://reactrouter.com/en/main)
-- [React Router — useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)
-- [React Router — useParams](https://reactrouter.com/en/main/hooks/use-params)
-- [React Router — useLocation](https://reactrouter.com/en/main/hooks/use-location)
+- [React Router — Official Documentation](https://reactrouter.com)
+- [React Router — useNavigate](https://reactrouter.com/api/hooks/useNavigate)
+- [React Router — useParams](https://reactrouter.com/api/hooks/useParams)
+- [React Router — useLocation](https://reactrouter.com/api/hooks/useLocation)
