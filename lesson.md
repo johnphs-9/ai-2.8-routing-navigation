@@ -180,7 +180,20 @@ React Router provides two navigation components:
 </NavLink>
 ```
 
-Both examples use an **absolute** `to`, starting with `/`. This is deliberate, and different from the relative paths you will use inside `<Route>` declarations later in this lesson. A `<Route>`'s relative path is resolved against its parent route in the route tree. A `<Link>` or `navigate()`'s relative path, by contrast, is resolved against the current URL in the address bar, so the same `<Link to="customers/5">` would go somewhere different depending on whether it renders while the user is on `/app` or `/app/customers`. That is easy to get wrong, so this lesson always writes full, absolute paths for `Link`, `NavLink`, and `navigate()`, and saves relative paths for `<Route>` declarations, where they are safe because the parent–child relationship is fixed at compile time.
+> **Absolute path**: starts with `/`, everything after the domain. You never write the domain itself, the browser fills it in from whatever site is currently loaded.
+>
+> - `www.example.com/app` → `/app`
+> - `www.example.com/app/customers` → `/app/customers`
+>
+> This meaning is the same whether the absolute path appears in a `<Route>` definition or in `Link`/`navigate()`.
+>
+> **Relative path**: no leading `/`, resolved against something else, but what it resolves against depends on where it appears:
+>
+> - In a `<Route>`, relative to the **parent route**. If the parent is `<Route path="app">`, a child `<Route path="customers">` means `/app/customers`, regardless of the URL the user is currently on.
+> - In `Link`, `NavLink`, or `navigate()`, relative to the **current URL in the address bar**. If the current URL is `www.example.com/app`, `<Link to="customers">` points to `www.example.com/app/customers`.
+> - That same `<Link to="customers">` rendered while on `www.example.com/app/customers` would instead point to `www.example.com/app/customers/customers`.
+
+That last case is easy to get wrong, so this lesson always writes full, absolute paths for `Link`, `NavLink`, and `navigate()`, and saves relative paths for `<Route>` declarations, where they are safe because the parent–child relationship is fixed at compile time.
 
 ### Create the Sidebar Component
 
