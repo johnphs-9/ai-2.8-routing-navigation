@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1000" width="1440" height="1000">
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill:#1F2937; }
+    .mono { font-family: "SFMono-Regular", Menlo, Consolas, monospace; }
+  </style>
+  <defs>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#F59E0B"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1440" height="1000" fill="#FFFFFF"/>
+
+  <!-- title -->
+  <text x="720" y="34" font-size="26" font-weight="700" text-anchor="middle">Simple CRM — Technical Architecture</text>
+  <text x="720" y="56" font-size="13" text-anchor="middle" fill="#667085">React 19 SPA (Vite) · React Router v7 · Context + useReducer state · json-server mock REST API</text>
+
+  <!-- ===================== LAYER A: CLIENT ===================== -->
+  <rect x="40" y="76" width="1360" height="390" rx="16" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="64" y="100" font-size="12.5" font-weight="700" fill="#1E3A8A" letter-spacing="0.5">CLIENT — REACT SINGLE-PAGE APP (BROWSER)</text>
+
+  <!-- bootstrap row -->
+  <rect x="64" y="114" width="180" height="58" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="76" y="136" font-size="13" font-weight="700">main.jsx</text>
+  <text x="76" y="152" font-size="11" fill="#4B5563">createRoot(...).render()</text>
+  <text x="76" y="166" font-size="10.5" fill="#4B5563">AuthProvider → CustomerProvider</text>
+
+  <line x1="244" y1="143" x2="298" y2="143" stroke="#6B7280" stroke-width="1.75" marker-end="url(#arrowGray)"/>
+
+  <rect x="300" y="114" width="250" height="58" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="312" y="136" font-size="13" font-weight="700">App.jsx</text>
+  <text x="312" y="152" font-size="11" fill="#4B5563">&lt;BrowserRouter&gt;&lt;Routes&gt;</text>
+  <text x="312" y="166" font-size="10.5" fill="#4B5563">defines all route paths</text>
+
+  <rect x="1176" y="114" width="200" height="58" rx="8" fill="#F9FAFB" stroke="#9CA3AF" stroke-dasharray="4,3"/>
+  <text x="1188" y="136" font-size="12" font-weight="700" fill="#374151">Vite dev server</text>
+  <text x="1188" y="152" font-size="10.5" fill="#6B7280">npm run dev — bundling + HMR</text>
+  <text x="1188" y="166" font-size="10.5" fill="#6B7280">serves the SPA to the browser</text>
+
+  <!-- fan-out from App.jsx to route groups -->
+  <line x1="425" y1="172" x2="425" y2="182" stroke="#6B7280" stroke-width="1.5"/>
+  <line x1="189" y1="182" x2="1276" y2="182" stroke="#6B7280" stroke-width="1.5"/>
+  <line x1="189" y1="182" x2="189" y2="187" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="495" y1="182" x2="495" y2="187" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="1276" y1="182" x2="1276" y2="187" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- public routes group -->
+  <rect x="64" y="188" width="250" height="262" rx="10" fill="#F8FAFF" stroke="#93C5FD" stroke-dasharray="5,4"/>
+  <text x="80" y="208" font-size="11" font-weight="700" fill="#1E3A8A">PUBLIC ROUTES</text>
+
+  <rect x="80" y="220" width="218" height="50" rx="6" fill="#fff" stroke="#3B82F6"/>
+  <text x="92" y="240" font-size="12" font-weight="700">WelcomePage</text>
+  <text x="92" y="256" font-size="10" fill="#6B7280" class="mono">path: "/" (index)</text>
+
+  <rect x="80" y="282" width="218" height="50" rx="6" fill="#fff" stroke="#3B82F6"/>
+  <text x="92" y="302" font-size="12" font-weight="700">LoginPage</text>
+  <text x="92" y="318" font-size="10" fill="#6B7280" class="mono">path: "/login"</text>
+
+  <text x="80" y="352" font-size="10" fill="#374151">On submit: checks email/password</text>
+  <text x="80" y="366" font-size="10" fill="#374151">against src/data/users.js (static</text>
+  <text x="80" y="380" font-size="10" fill="#374151">array) — no network call, then</text>
+  <text x="80" y="398" font-size="10" fill="#374151" font-style="italic">calls AuthContext.login(user)</text>
+
+  <!-- protected gate -->
+  <rect x="340" y="188" width="310" height="46" rx="8" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="354" y="208" font-size="12.5" font-weight="700" fill="#1E3A8A">ProtectedRoute</text>
+  <text x="354" y="224" font-size="10.5" fill="#1E40AF">guards /app/* — requires AuthContext.user</text>
+
+  <!-- not found -->
+  <rect x="1176" y="188" width="200" height="46" rx="8" fill="#fff" stroke="#94A3B8"/>
+  <text x="1188" y="208" font-size="12" font-weight="700">NotFoundPage</text>
+  <text x="1188" y="224" font-size="10" fill="#6B7280" class="mono">path: "*" (catch-all)</text>
+
+  <line x1="495" y1="234" x2="495" y2="255" stroke="#2563EB" stroke-width="1.75" marker-end="url(#arrowGray)"/>
+
+  <!-- root layout -->
+  <rect x="340" y="256" width="1036" height="46" rx="8" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="354" y="276" font-size="12.5" font-weight="700" fill="#1E3A8A">RootLayout</text>
+  <text x="354" y="292" font-size="10.5" fill="#1E40AF">renders &lt;Sidebar/&gt; + &lt;Outlet/&gt; for nested app pages</text>
+
+  <!-- fan-out to page grid -->
+  <line x1="858" y1="302" x2="858" y2="312" stroke="#6B7280" stroke-width="1.5"/>
+  <line x1="422" y1="312" x2="1295" y2="312" stroke="#6B7280" stroke-width="1.5"/>
+  <line x1="422" y1="312" x2="422" y2="321" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="596" y1="312" x2="596" y2="321" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="771" y1="312" x2="771" y2="321" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="945" y1="312" x2="945" y2="321" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="1120" y1="312" x2="1120" y2="321" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="1295" y1="312" x2="1295" y2="321" stroke="#6B7280" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- page grid -->
+  <rect x="340" y="322" width="163" height="96" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="352" y="344" font-size="11.5" font-weight="700">DashboardPage</text>
+  <text x="352" y="362" font-size="9" fill="#6B7280" class="mono">/app</text>
+
+  <rect x="515" y="322" width="163" height="96" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="527" y="344" font-size="11.5" font-weight="700">CustomersPage</text>
+  <text x="527" y="362" font-size="9" fill="#6B7280" class="mono">/app/customers</text>
+
+  <rect x="689" y="322" width="163" height="96" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="701" y="344" font-size="11" font-weight="700">CustomerDetailPage</text>
+  <text x="701" y="362" font-size="8.5" fill="#6B7280" class="mono">/app/customers/:id</text>
+
+  <rect x="864" y="322" width="163" height="96" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="876" y="344" font-size="11.3" font-weight="700">NewCustomerPage</text>
+  <text x="876" y="362" font-size="8.5" fill="#6B7280" class="mono">/app/customers/new</text>
+
+  <rect x="1039" y="322" width="163" height="96" rx="8" fill="#fff" stroke="#3B82F6"/>
+  <text x="1051" y="344" font-size="11.3" font-weight="700">EditCustomerPage</text>
+  <text x="1051" y="362" font-size="8.3" fill="#6B7280" class="mono">/app/customers/:id/edit</text>
+
+  <rect x="1213" y="322" width="163" height="96" rx="8" fill="#fff" stroke="#F59E0B" stroke-width="1.75"/>
+  <text x="1225" y="344" font-size="11.5" font-weight="700" fill="#92400E">ProductsPage</text>
+  <text x="1225" y="362" font-size="9" fill="#6B7280" class="mono">/app/products</text>
+  <text x="1225" y="380" font-size="8.5" fill="#B45309">local mock data —</text>
+  <text x="1225" y="392" font-size="8.5" fill="#B45309">bypasses Context/API</text>
+
+  <!-- ===================== LAYER B: STATE ===================== -->
+  <rect x="40" y="486" width="1360" height="170" rx="16" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1.5"/>
+  <text x="64" y="510" font-size="12.5" font-weight="700" fill="#4C1D95" letter-spacing="0.5">APPLICATION STATE — REACT CONTEXT (src/contexts/)</text>
+
+  <rect x="64" y="524" width="656" height="112" rx="10" fill="#fff" stroke="#8B5CF6"/>
+  <text x="80" y="546" font-size="14" font-weight="700">AuthContext</text>
+  <text x="80" y="566" font-size="11" fill="#374151">state: { user }</text>
+  <text x="80" y="582" font-size="11" fill="#374151">actions: login() · logout() · hasRole(role)</text>
+  <text x="80" y="598" font-size="10" fill="#6B7280" font-style="italic">in-memory only — cleared on page refresh</text>
+  <text x="80" y="616" font-size="10" fill="#6B7280">consumed by: LoginPage · ProtectedRoute · Header · Sidebar</text>
+
+  <rect x="736" y="524" width="640" height="112" rx="10" fill="#fff" stroke="#8B5CF6"/>
+  <text x="752" y="546" font-size="14" font-weight="700">CustomerContext</text>
+  <text x="752" y="566" font-size="10.5" fill="#374151">useReducer(customerReducer) → { customers, loading, error, submitting }</text>
+  <text x="752" y="582" font-size="10.5" fill="#374151">actions: addCustomer() · updateCustomer() · deleteCustomer()</text>
+  <text x="752" y="598" font-size="10" fill="#6B7280" font-style="italic">fetches from json-server on mount (simulated 1s delay)</text>
+  <text x="752" y="616" font-size="9.5" fill="#6B7280">consumed by: Dashboard · Customers · CustomerDetail/Card · New/EditCustomerPage</text>
+
+  <!-- connectors into context layer -->
+  <line x1="392" y1="466" x2="392" y2="523" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+  <text x="398" y="498" font-size="9.5" fill="#6D28D9">reads/writes session</text>
+
+  <line x1="1056" y1="466" x2="1056" y2="523" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+  <text x="936" y="498" font-size="9.5" fill="#6D28D9">reads/dispatches customer state</text>
+
+  <!-- ProductsPage bypass path -->
+  <path d="M1295,418 L1295,430 L1410,430 L1410,700 L1394,714" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowOrange)"/>
+  <text x="1416" y="650" font-size="9.5" fill="#B45309" text-anchor="middle" transform="rotate(-90 1416 650)">bypasses Context/API layer</text>
+
+  <!-- ===================== LAYER C: DATA ===================== -->
+  <rect x="40" y="676" width="1360" height="204" rx="16" fill="#ECFDF5" stroke="#6EE7B7" stroke-width="1.5"/>
+  <text x="64" y="700" font-size="12.5" font-weight="700" fill="#065F46" letter-spacing="0.5">DATA SOURCES (local development only — no production backend)</text>
+
+  <rect x="64" y="714" width="420" height="144" rx="10" fill="#fff" stroke="#10B981"/>
+  <text x="80" y="738" font-size="14" font-weight="700">json-server</text>
+  <text x="80" y="754" font-size="10.5" fill="#6B7280">(mock REST API)</text>
+  <text x="80" y="774" font-size="11" fill="#374151">npm run server → http://localhost:3001</text>
+  <text x="80" y="792" font-size="11" fill="#374151">GET / POST / PATCH / DELETE</text>
+  <text x="80" y="808" font-size="11" fill="#374151" class="mono">/customers</text>
+
+  <line x1="484" y1="786" x2="536" y2="786" stroke="#10B981" stroke-width="1.75" marker-start="url(#arrowGray)" marker-end="url(#arrowGray)"/>
+
+  <rect x="536" y="714" width="200" height="144" rx="10" fill="#fff" stroke="#10B981"/>
+  <text x="552" y="738" font-size="13" font-weight="700">data/db.json</text>
+  <text x="552" y="756" font-size="10" fill="#6B7280">flat-file JSON store</text>
+  <text x="552" y="774" font-size="10" fill="#6B7280">read &amp; rewritten</text>
+  <text x="552" y="790" font-size="10" fill="#6B7280">by json-server</text>
+
+  <rect x="776" y="714" width="624" height="144" rx="10" fill="#fff" stroke="#10B981"/>
+  <text x="792" y="738" font-size="14" font-weight="700">data/products.js</text>
+  <text x="792" y="756" font-size="10.5" fill="#374151">static in-memory array — ~300 generated products</text>
+  <text x="792" y="774" font-size="10.5" fill="#374151">produced ahead of time by scripts/generate-products.js</text>
+  <text x="792" y="792" font-size="10.5" fill="#374151">imported directly and bundled at build time — no HTTP request</text>
+
+  <!-- fetch connector -->
+  <path d="M1056,636 L1056,662 L274,662 L274,713" fill="none" stroke="#6B7280" stroke-width="1.75" marker-end="url(#arrowGray)"/>
+  <text x="660" y="655" font-size="9.5" fill="#4B5563" text-anchor="middle">fetch() over HTTP — JSON</text>
+
+  <!-- caution -->
+  <rect x="40" y="900" width="1360" height="66" rx="12" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="64" y="924" font-size="12.5" font-weight="700" fill="#92400E">⚠ Teaching / demo project — not production-ready</text>
+  <text x="64" y="944" font-size="11" fill="#78350F">json-server + a flat JSON file stand in for a real backend/database. Login is a client-side check against a hard-coded</text>
+  <text x="64" y="958" font-size="11" fill="#78350F">user list (src/data/users.js) — credentials are never sent to or verified by a server.</text>
+</svg>

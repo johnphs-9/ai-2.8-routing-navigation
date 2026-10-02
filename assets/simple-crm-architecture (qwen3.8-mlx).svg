@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860">
+  <style>
+    .sans { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .mono { font-family: "SF Mono", Menlo, Consolas, monospace; }
+    .title { font-size: 22px; font-weight: 700; fill: #182236; }
+    .sub { font-size: 12px; fill: #5c6675; }
+    .h-region { font-size: 13px; font-weight: 700; fill: #2c3a52; }
+    .h-item { font-size: 12px; font-weight: 700; fill: #1f2a3d; }
+    .body { font-size: 11px; fill: #55607a; }
+    .body-s { font-size: 10.5px; fill: #55607a; }
+    .mono-s { font-size: 10px; fill: #44506b; }
+    .mono-m { font-size: 10.5px; fill: #44506b; }
+    .lbl { font-size: 10.5px; fill: #5a6572; }
+    .chip-t { font-size: 11px; fill: #33405a; }
+  </style>
+  <defs>
+    <marker id="m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5a6572"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="860" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text class="sans title" x="50" y="46">Simple CRM — Technical Architecture &amp; Design</text>
+  <text class="sans sub" x="50" y="68">simple-crm-web-soln · React 19 + Vite 8 SPA · React Router v7 · json-server mock REST API — Objective AI Engineering</text>
+
+  <!-- Legend -->
+  <rect x="910" y="30" width="12" height="12" fill="#f6f9fd" stroke="#b9c8de"/>
+  <text class="sans lbl" x="928" y="41">UI layer</text>
+  <rect x="990" y="30" width="12" height="12" fill="#f1f7f1" stroke="#b3d2b6"/>
+  <text class="sans lbl" x="1008" y="41">mock API + store</text>
+  <rect x="1118" y="30" width="12" height="12" fill="#fdf7ec" stroke="#e3cd9e"/>
+  <text class="sans lbl" x="1136" y="41">static data &amp; tooling</text>
+
+  <!-- ================= CLIENT ================= -->
+  <rect x="50" y="90" width="1180" height="350" rx="12" fill="#f6f9fd" stroke="#b9c8de" stroke-width="1.5"/>
+  <text class="sans h-region" x="66" y="114">CLIENT — React SPA (CSS Modules) · served by Vite 8 dev server (HMR)</text>
+
+  <!-- col1: state & bootstrap -->
+  <text class="sans h-region" x="82" y="152">Global state &amp; bootstrap</text>
+
+  <rect x="82" y="162" width="276" height="64" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans h-item" x="94" y="180">main.jsx — entry point</text>
+  <text class="sans body" x="94" y="198">StrictMode wraps the app</text>
+  <text class="mono mono-s" x="94" y="214">AuthProvider → CustomerProvider → App</text>
+
+  <rect x="82" y="236" width="276" height="72" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans h-item" x="94" y="254">AuthContext — useState</text>
+  <text class="mono mono-s" x="94" y="274">user · login() · logout() · hasRole()</text>
+  <text class="sans body" x="94" y="292">in-memory session — no persistence</text>
+
+  <rect x="82" y="318" width="276" height="84" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans h-item" x="94" y="336">CustomerContext — useReducer</text>
+  <text class="mono mono-s" x="94" y="354">customers · loading · error · submitting</text>
+  <text class="mono mono-s" x="94" y="370">searchTerm · statusFilter → filtered</text>
+  <text class="mono mono-s" x="94" y="386">add / update / delete → fetch (REST)</text>
+
+  <!-- col2: routing -->
+  <text class="sans h-region" x="402" y="152">Routing — React Router v7 · BrowserRouter</text>
+
+  <rect x="402" y="162" width="406" height="48" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans h-item" x="414" y="180">Public routes</text>
+  <text class="mono mono-m" x="414" y="198">`/` → WelcomePage · `/login` → LoginPage</text>
+
+  <rect x="402" y="218" width="406" height="52" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans h-item" x="414" y="236">ProtectedRoute — auth gate</text>
+  <text class="mono mono-m" x="414" y="256">no session → &lt;Navigate to="/login" state={{from}}/&gt;</text>
+
+  <rect x="402" y="278" width="406" height="126" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="mono mono-m" x="414" y="296">/app → RootLayout — &lt;Sidebar/&gt; + &lt;Outlet/&gt;</text>
+  <text class="sans body" x="424" y="314">index → DashboardPage</text>
+  <text class="sans body" x="424" y="331">/customers → CustomersPage (list · search · status filter)</text>
+  <text class="sans body" x="424" y="348">/customers/new → NewCustomerPage</text>
+  <text class="sans body" x="424" y="365">/customers/:id → CustomerDetailPage</text>
+  <text class="sans body" x="424" y="382">/customers/:id/edit → EditCustomerPage</text>
+  <text class="sans body" x="424" y="399">/products → ProductsPage (static catalog)</text>
+
+  <!-- col3: components -->
+  <text class="sans h-region" x="852" y="152">UI components</text>
+
+  <rect x="852" y="162" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="937" y="181" text-anchor="middle">Sidebar</text>
+  <rect x="1030" y="162" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="1115" y="181" text-anchor="middle">Header</text>
+
+  <rect x="852" y="200" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="937" y="219" text-anchor="middle">CustomerCard</text>
+  <rect x="1030" y="200" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="1115" y="219" text-anchor="middle">CustomerDetail</text>
+
+  <rect x="852" y="238" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="937" y="257" text-anchor="middle">SearchBar</text>
+  <rect x="1030" y="238" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="1115" y="257" text-anchor="middle">ProductSearchBar</text>
+
+  <rect x="852" y="276" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="937" y="295" text-anchor="middle">ProductList</text>
+  <rect x="1030" y="276" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="1115" y="295" text-anchor="middle">Spinner</text>
+
+  <rect x="852" y="314" width="170" height="30" rx="8" fill="#ffffff" stroke="#c9d5e8"/>
+  <text class="sans chip-t" x="937" y="333" text-anchor="middle">ProtectedRoute</text>
+
+  <text class="sans body-s" x="852" y="360">lucide-react icons · react-spinners · CSS Modules</text>
+
+  <!-- ================= ARROWS client → row B ================= -->
+  <line x1="255" y1="440" x2="255" y2="500" stroke="#5a6572" stroke-width="1.5" marker-start="url(#m)" marker-end="url(#m)"/>
+  <text class="mono mono-s" x="268" y="466">fetch → http://localhost:3001</text>
+  <text class="sans lbl" x="268" y="482">REST /customers CRUD</text>
+
+  <line x1="985" y1="440" x2="985" y2="500" stroke="#5a6572" stroke-width="1.5" marker-start="url(#m)" marker-end="url(#m)"/>
+  <text class="sans lbl" x="970" y="466" text-anchor="end">static imports (bundled by Vite)</text>
+  <text class="mono mono-s" x="970" y="482" text-anchor="end">users.js · products.js</text>
+
+  <!-- ================= MOCK API ================= -->
+  <rect x="50" y="500" width="410" height="290" rx="12" fill="#f1f7f1" stroke="#b3d2b6" stroke-width="1.5"/>
+  <text class="sans h-region" x="66" y="522">MOCK API — json-server</text>
+  <text class="mono mono-s" x="66" y="538">npm run server · port 3001 · --watch data/db.json</text>
+
+  <rect x="66" y="550" width="378" height="118" rx="8" fill="#ffffff" stroke="#c4dcc6"/>
+  <text class="sans h-item" x="78" y="568">REST routes</text>
+  <text class="mono mono-m" x="90" y="586">GET /customers — list</text>
+  <text class="mono mono-m" x="90" y="602">POST /customers — create</text>
+  <text class="mono mono-m" x="90" y="618">GET /customers/:id — read</text>
+  <text class="mono mono-m" x="90" y="634">PATCH /customers/:id — update</text>
+  <text class="mono mono-m" x="90" y="650">DELETE /customers/:id — remove</text>
+
+  <rect x="66" y="678" width="378" height="52" rx="8" fill="#ffffff" stroke="#c4dcc6"/>
+  <text class="sans h-item" x="78" y="696">File-backed storage</text>
+  <text class="sans body" x="78" y="714">writes persist to disk (JSON)</text>
+
+  <!-- db.json cylinder -->
+  <path d="M520 580 L520 715 A85 20 0 0 0 690 715 L690 580" fill="#e3f0e5" stroke="#7fae88" stroke-width="1.5"/>
+  <ellipse cx="605" cy="580" rx="85" ry="20" fill="#edf6ee" stroke="#7fae88" stroke-width="1.5"/>
+  <text class="sans h-item" x="605" y="635" text-anchor="middle">data/db.json</text>
+  <text class="sans body" x="605" y="653" text-anchor="middle">customers collection</text>
+  <text class="sans body-s" x="605" y="669" text-anchor="middle">(file-watched store)</text>
+
+  <line x1="462" y1="645" x2="518" y2="645" stroke="#5a6572" stroke-width="1.5" marker-end="url(#m)"/>
+  <text class="sans lbl" x="490" y="636" text-anchor="middle">persist</text>
+
+  <!-- ================= STATIC DATA ================= -->
+  <rect x="760" y="500" width="470" height="290" rx="12" fill="#fdf7ec" stroke="#e3cd9e" stroke-width="1.5"/>
+  <text class="sans h-region" x="776" y="522">BUNDLED STATIC DATA &amp; TOOLING</text>
+  <text class="sans lbl" x="776" y="538">no network — imported at build time</text>
+
+  <rect x="776" y="550" width="390" height="56" rx="8" fill="#ffffff" stroke="#e6d6b2"/>
+  <text class="mono mono-m" x="788" y="568" font-weight="700">src/data/users.js</text>
+  <text class="sans body" x="788" y="586">hardcoded users — LoginPage verifies</text>
+  <text class="sans body-s" x="788" y="600">email + password in-browser (mock auth)</text>
+
+  <rect x="776" y="614" width="390" height="56" rx="8" fill="#ffffff" stroke="#e6d6b2"/>
+  <text class="mono mono-m" x="788" y="632" font-weight="700">data/products.js</text>
+  <text class="sans body" x="788" y="650">static product catalog for ProductsPage</text>
+  <text class="sans body-s" x="788" y="664">search + deterministic discount + cart</text>
+
+  <rect x="776" y="678" width="390" height="44" rx="8" fill="#ffffff" stroke="#e6d6b2"/>
+  <text class="mono mono-m" x="788" y="696" font-weight="700">src/mockData.js</text>
+  <text class="sans body-s" x="788" y="712">legacy in-bundle customers (superseded by API)</text>
+
+  <rect x="776" y="730" width="390" height="44" rx="8" fill="#ffffff" stroke="#e6d6b2"/>
+  <text class="mono mono-m" x="788" y="748" font-weight="700">scripts/generate-products.js</text>
+  <text class="sans body-s" x="788" y="764">Node CLI — regenerates the product catalog</text>
+
+  <line x1="1200" y1="752" x2="1200" y2="642" stroke="#5a6572" stroke-width="1.2" marker-end="url(#m)"/>
+  <text class="sans lbl" x="1200" y="696" text-anchor="middle">regenerates</text>
+
+  <!-- Captions -->
+  <text class="sans body-s" x="50" y="818">Runtime: sign-in is an in-browser check against users.js → ProtectedRoute unlocks /app · customer list + CRUD flow through CustomerContext → json-server → db.json · products come from the bundled static catalog.</text>
+  <text class="sans body-s" x="50" y="836">npm run dev → Vite dev server (HMR) · npm run server → json-server --watch data/db.json --port 3001 · npm run build → static bundle</text>
+</svg>
